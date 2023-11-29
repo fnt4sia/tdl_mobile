@@ -9,7 +9,6 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -40,17 +39,18 @@ class _TodoListState extends State<TodoList> {
               padding: const EdgeInsets.all(10),
               child: Row(
                 children: [
-                  todo.isDone
-                      ? const Icon(
-                          Icons.check_box,
-                          color: Colors.white,
-                          size: 32,
-                        )
-                      : const Icon(
-                          Icons.check_box_outline_blank,
-                          color: Colors.white,
-                          size: 32,
-                        ),
+                  IconButton(
+                    onPressed: () {
+                      
+                    },
+                    icon: Icon(
+                      todo.isDone
+                          ? Icons.check_box
+                          : Icons.check_box_outline_blank,
+                      size: 32,
+                    ),
+                    color: Colors.white,
+                  ),
                   const SizedBox(
                     width: 10,
                   ),

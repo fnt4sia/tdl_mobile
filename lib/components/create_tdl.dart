@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:tdl/data/list.dart';
 import '../data/user.dart';
-import 'package:http/http.dart' as http;
 
 class FormTDL extends StatefulWidget {
-  const FormTDL({Key? key, required this.newListTodo}) : super(key: key);
-  final List<Todo> newListTodo;
+  const FormTDL({super.key});
 
   @override
   State<FormTDL> createState() => _FormTDLState();
@@ -135,31 +131,14 @@ class _FormTDLState extends State<FormTDL> {
                   });
                 } else {
                   setState(() {
-                    widget.newListTodo.add(Todo(
+                    User.todoList.add(Todo(
                       title: titleController.text,
                       desc: descriptionController.text,
                       isDone: false,
                     ));
                   });
 
-                  final getUrl = Uri.parse(
-                      'https://tdl-mobile-64246-default-rtdb.asia-southeast1.firebasedatabase.app/users/${User.username}.json');
-                  final getResponse = await http.get(getUrl);
-                  final getData = jsonDecode(getResponse.body);
-                  final key = getData.keys.first;
-
-                  final url = Uri.parse(
-                      'https://tdl-mobile-64246-default-rtdb.asia-southeast1.firebasedatabase.app/users/${User.username}/$key.json');
-                  await http.patch(url,
-                      body: jsonEncode({
-                        'todolist': widget.newListTodo
-                            .map((data) => {
-                                  'title': data.title,
-                                  'desc': data.desc,
-                                  'isDone': data.isDone,
-                                })
-                            .toList(),
-                      }));
+                  await User.saveData();
                   navigator.pushReplacementNamed('/home');
                 }
               },

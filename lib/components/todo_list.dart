@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import '../data/list.dart';
+import '../data/user.dart';
 
 class TodoList extends StatefulWidget {
-  const TodoList(
-      {Key? key, required this.newListTodo, required this.todoIsDone})
-      : super(key: key);
-  final List<Todo> newListTodo;
+  const TodoList({Key? key, required this.todoIsDone}) : super(key: key);
   final Function todoIsDone;
 
   @override
@@ -35,7 +32,7 @@ class _TodoListState extends State<TodoList> {
             height: 20,
           ),
           Column(
-              children: widget.newListTodo.map((todo) {
+              children: User.todoList.map((todo) {
             return Container(
               decoration: const BoxDecoration(
                 color: Colors.transparent,
@@ -45,7 +42,7 @@ class _TodoListState extends State<TodoList> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      widget.todoIsDone(widget.newListTodo.indexOf(todo));
+                      widget.todoIsDone(User.todoList.indexOf(todo));
                     },
                     icon: Icon(
                       todo.isDone

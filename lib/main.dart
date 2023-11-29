@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tdl/pages/add.dart';
 import 'package:tdl/pages/home.dart';
 import 'package:tdl/pages/login.dart';
 import 'package:tdl/pages/register.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/register': (context) => const RegisterPage(),
         '/login': (context) => const LoginPage(),
+        '/add': (context) => const AddTDL(),
       },
     );
   }

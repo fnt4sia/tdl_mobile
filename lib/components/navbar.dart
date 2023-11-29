@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tdl/pages/add.dart';
 import '../data/user.dart';
-import '../data/list.dart';
 
 class NavbarHome extends StatelessWidget {
-  const NavbarHome({Key? key, required this.newListTodo}) : super(key: key);
-  final List<Todo> newListTodo;
+  const NavbarHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +44,7 @@ class NavbarHome extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => AddTDL(newListTodo: newListTodo)));
+              Navigator.pushNamed(context, '/add');
             },
           ),
         )

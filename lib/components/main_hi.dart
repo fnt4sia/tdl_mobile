@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../data/user.dart';
 import 'package:intl/intl.dart';
+import '../data/list.dart';
 
 class MainHi extends StatefulWidget {
-  const MainHi({super.key});
-
+  const MainHi({Key? key, required this.newListTodo}) : super(key: key);
+  final List<Todo> newListTodo;
   @override
   State<MainHi> createState() => _MainHiState();
 }
@@ -19,10 +20,11 @@ class _MainHiState extends State<MainHi> {
   void initState() {
     super.initState();
 
-    if (User.listTodo.isNotEmpty) {
+    if (widget.newListTodo.isNotEmpty) {
       setState(() {
-        progress = User.listTodo.where((data) => data.isDone == true).length /
-            User.listTodo.length;
+        progress =
+            widget.newListTodo.where((data) => data.isDone == true).length /
+                widget.newListTodo.length;
       });
     }
   }
@@ -90,7 +92,7 @@ class _MainHiState extends State<MainHi> {
                       ),
                     ),
                     Text(
-                      'You Have ${User.listTodo.where((element) => element.isDone == false).length} Tasks Left',
+                      'You Have ${widget.newListTodo.where((element) => element.isDone == false).length} Tasks Left',
                       style: const TextStyle(
                           fontSize: 14,
                           color: Colors.white,

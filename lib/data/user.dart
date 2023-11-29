@@ -1,4 +1,3 @@
-import 'list.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -6,7 +5,6 @@ class User {
   static String username = '';
   static String password = '';
   static bool isLoggedIn = false;
-  static List<Todo> listTodo = [];
 
   static Future<bool> tryRegister(
       String usernameTemp, String passwordTemp) async {
@@ -58,40 +56,5 @@ class User {
     }
   }
 
-  static Future<void> saveData() async {
-    final getUrl = Uri.parse(
-        'https://tdl-mobile-64246-default-rtdb.asia-southeast1.firebasedatabase.app/users/${User.username}.json');
-    final getResponse = await http.get(getUrl);
-    final getData = jsonDecode(getResponse.body);
-    final key = getData.keys.first;
 
-    final url = Uri.parse(
-        'https://tdl-mobile-64246-default-rtdb.asia-southeast1.firebasedatabase.app/users/${User.username}/$key.json');
-    await http.patch(url,
-        body: jsonEncode({
-          'todolist': User.listTodo
-              .map((data) => {
-                    'title': data.title,
-                    'desc': data.desc,
-                    'isDone': data.isDone,
-                  })
-              .toList(),
-        }));
-  }
-
-  static Future<void> getData() async {
-    final newUrl = Uri.parse(
-        'https://tdl-mobile-64246-default-rtdb.asia-southeast1.firebasedatabase.app/users/${User.username}.json');
-    final newResponse = await http.get(newUrl);
-    final data = jsonDecode(newResponse.body);
-    if (data[data.keys.first]['todolist'] != null) {
-      User.listTodo = (data[data.keys.first]['todolist'] as List).map((data) {
-        return Todo(
-          title: data['title'],
-          desc: data['desc'],
-          isDone: data['isDone'],
-        );
-      }).toList();
-    }
-  }
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tdl/pages/add.dart';
 import '../data/user.dart';
+import '../data/list.dart';
 
 class NavbarHome extends StatelessWidget {
-  const NavbarHome({super.key});
+  const NavbarHome({Key? key, required this.newListTodo}) : super(key: key);
+  final List<Todo> newListTodo;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,6 @@ class NavbarHome extends StatelessWidget {
             onPressed: () {
               User.username = '';
               User.password = '';
-              User.listTodo = [];
               User.isLoggedIn = false;
               Navigator.pushReplacementNamed(context, '/login');
             },
@@ -45,7 +47,10 @@ class NavbarHome extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, '/add');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AddTDL(newListTodo: newListTodo)));
             },
           ),
         )

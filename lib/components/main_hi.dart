@@ -13,7 +13,7 @@ class _MainHiState extends State<MainHi> {
   final DateTime date = DateTime.now();
   String getMonth() => DateFormat('MMMM').format(date);
   String getDay() => DateFormat('EEEE').format(date);
-  double progress = 0;
+  double progress = 1;
 
   @override
   void initState() {

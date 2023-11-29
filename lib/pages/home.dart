@@ -33,10 +33,29 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void todoIsDone(int index) {
-    setState(() {
-      newListTodo[index].isDone = !newListTodo[index].isDone;
-    });
+  void todoIsDone(int index) async {
+    newListTodo[index].isDone = !newListTodo[index].isDone;
+    print(newListTodo);
+
+    final getUrl = Uri.parse(
+        'https://tdl-mobile-64246-default-rtdb.asia-southeast1.firebasedatabase.app/users/${User.username}.json');
+    final getResponse = await http.get(getUrl);
+    final getData = jsonDecode(getResponse.body);
+    final key = getData.keys.first;
+
+    final url = Uri.parse(
+        'https://tdl-mobile-64246-default-rtdb.asia-southeast1.firebasedatabase.app/users/${User.username}/$key.json');
+    await http.patch(url,
+        body: jsonEncode({
+          'todolist': newListTodo
+              .map((data) => {
+                    'title': data.title,
+                    'desc': data.desc,
+                    'isDone': data.isDone,
+                  })
+              .toList(),
+        }));
+    setState(() {});
   }
 
   @override
@@ -61,7 +80,10 @@ class _HomePageState extends State<HomePage> {
                       height: 30,
                     ),
                     newListTodo.isNotEmpty
-                        ? TodoList(newListTodo: newListTodo)
+                        ? TodoList(
+                            newListTodo: newListTodo,
+                            todoIsDone: todoIsDone,
+                          )
                         : const Center(
                             child: Text(
                               'You Dont Have List Yet',

@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
         future: User.getData(),
         builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator(); // Show a loading spinner while waiting
+            return const CircularProgressIndicator();
           } else {
             return Scaffold(
               backgroundColor: const Color(0XFF11161C),

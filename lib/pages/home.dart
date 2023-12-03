@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void todoIsDone(int id, bool currentIsDone) async {
+  void todoIsDone(String id, bool currentIsDone) async {
     final url = Uri.parse(
         'https://tdl-mobile-64246-default-rtdb.asia-southeast1.firebasedatabase.app/todolist/$id.json');
     await http.patch(url,

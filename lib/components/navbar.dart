@@ -15,6 +15,7 @@ class NavbarHome extends StatelessWidget {
               User.username = '';
               User.password = '';
               User.isLoggedIn = false;
+              User.todoList = [];
               Navigator.pushReplacementNamed(context, '/login');
             },
             icon: const Icon(

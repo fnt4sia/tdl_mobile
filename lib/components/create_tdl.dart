@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tdl/data/list.dart';
 import '../data/user.dart';
 
 class FormTDL extends StatefulWidget {
@@ -130,15 +129,8 @@ class _FormTDLState extends State<FormTDL> {
                     errorText = 'Please Fill The Data';
                   });
                 } else {
-                  setState(() {
-                    User.todoList.add(Todo(
-                      title: titleController.text,
-                      desc: descriptionController.text,
-                      isDone: false,
-                    ));
-                  });
-
-                  await User.saveData();
+                  await User.addData(titleController.text,
+                      descriptionController.text, User.username);
                   navigator.pushReplacementNamed('/home');
                 }
               },

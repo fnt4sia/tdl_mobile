@@ -1,6 +1,11 @@
 class Todo {
-  Todo({required this.title, required this.desc, required this.isDone});
+  Todo(
+      {required this.id,
+      required this.title,
+      required this.desc,
+      required this.isDone});
+  final String id;
   final String title;
   final String desc;
-  bool isDone;
+  final bool isDone;
 }

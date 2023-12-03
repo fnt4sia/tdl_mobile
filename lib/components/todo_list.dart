@@ -42,7 +42,7 @@ class _TodoListState extends State<TodoList> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      widget.todoIsDone(User.todoList.indexOf(todo));
+                      widget.todoIsDone(todo.id, todo.isDone);
                     },
                     icon: Icon(
                       todo.isDone

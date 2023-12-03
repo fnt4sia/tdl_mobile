@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tdl/components/main_hi.dart';
 import 'package:tdl/components/todo_list.dart';
 import '../components/navbar.dart';
 import '../data/user.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,10 +14,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void todoIsDone(int index) async {
-    User.todoList[index].isDone = !User.todoList[index].isDone;
-
-    await User.saveData();
+  void todoIsDone(int id, bool currentIsDone) async {
+    final url = Uri.parse(
+        'https://tdl-mobile-64246-default-rtdb.asia-southeast1.firebasedatabase.app/todolist/$id.json');
+    await http.patch(url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'isDone': !currentIsDone,
+        }));
     setState(() {});
   }
 

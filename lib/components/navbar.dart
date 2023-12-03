@@ -95,3 +95,54 @@ class NavbarAdd extends StatelessWidget {
     );
   }
 }
+
+class NavDesc extends StatelessWidget {
+  const NavDesc({super.key, required this.id});
+  final String id;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          flex: 1,
+          child: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        const Expanded(
+          flex: 3,
+          child: Text(
+            'Create New Task',
+            style: TextStyle(
+              color: Colors.transparent,
+              letterSpacing: 1,
+              fontWeight: FontWeight.w500,
+              fontSize: 24,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: IconButton(
+            onPressed: () async {
+              var navigator = Navigator.of(context);
+              await User.deleteData(id);
+              navigator.pushReplacementNamed('/home');
+            },
+            icon: const Icon(Icons.delete_outline),
+            color: Colors.white,
+          ),
+        )
+      ],
+    );
+  }
+}

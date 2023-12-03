@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../data/user.dart';
+import '../pages/desc.dart';
 
 class TodoList extends StatefulWidget {
   const TodoList({Key? key, required this.todoIsDone}) : super(key: key);
@@ -80,10 +81,21 @@ class _TodoListState extends State<TodoList> {
                       ],
                     ),
                   ),
-                  const Icon(
-                    Icons.navigate_next_sharp,
-                    color: Colors.white,
-                    size: 32,
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DescTDL(
+                              descTodo: todo,
+                            ),
+                          ));
+                    },
+                    icon: const Icon(
+                      Icons.navigate_next_sharp,
+                      color: Colors.white,
+                      size: 32,
+                    ),
                   )
                 ],
               ),

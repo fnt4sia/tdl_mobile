@@ -100,4 +100,26 @@ class User {
       }),
     );
   }
+
+  static Future<void> deleteData(String id) async {
+    final url = Uri.parse(
+        'https://tdl-mobile-64246-default-rtdb.asia-southeast1.firebasedatabase.app/todolist/$id.json');
+    await http.delete(url);
+  }
+
+  static Future<void> updateData(
+      String title, String desc, String id, bool isDone) async {
+    final url = Uri.parse(
+        'https://tdl-mobile-64246-default-rtdb.asia-southeast1.firebasedatabase.app/todolist/$id.json');
+    await http.put(
+      url,
+      headers: {'Contet-Type': 'application/json'},
+      body: jsonEncode({
+        'title': title,
+        'desc': desc,
+        'isDone': false,
+        'username': User.username,
+      }),
+    );
+  }
 }

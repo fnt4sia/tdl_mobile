@@ -53,7 +53,7 @@ class User {
     final response = await http.get(url);
     final value = jsonDecode(response.body).values.toList();
 
-    if (value == null) {
+    if (value.isEmpty) {
       return false;
     } else {
       for (int i = 0; i < value.length; i++) {
